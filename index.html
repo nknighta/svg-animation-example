@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>svg animation example</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #myLine {
+            stroke: red;
+            stroke-width: 4;
+        }
+
+        #loadtext {
+            position: absolute;
+            font-size: 20px;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <svg width="300" height="10">
+            <line id="myLine" x1="0" y1="10" x2="300" y2="10" />
+        </svg>
+        <p id="loadtext"></p>
+    </div>
+    <script>
+        const line = document.getElementById('myLine');
+        const text = document.getElementById('loadtext');
+        const length = line.getTotalLength();
+
+        line.style.strokeDasharray = length;
+        line.style.strokeDashoffset = length;
+        setTimeout(() => {
+            line.style.transition = 'stroke-dashoffset 2s ease-in-out';
+            line.style.strokeDashoffset = '0';
+            text.innerHTML = 'uploding...';
+
+        }, 10);
+
+        setTimeout(() => {
+            text.innerHTML = 'complete!';
+        }, 2000);
+    </script>
+</body>
+
+</html>
